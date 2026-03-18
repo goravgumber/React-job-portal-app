@@ -1,123 +1,241 @@
-📘 Job Board App – Full-Stack Web Application
-A complete Job Board Application where users can view jobs, and admins can login to post/edit/delete jobs. The application is built using MERN stack (MySQL + Express + React + Node.js) with authentication and protected routes.
+# 📘 Job Board App – Full-Stack Web Application
 
-📁 Folder Structure
+A complete **Job Board Application** where users can view jobs, and admins can log in to post, edit, and delete job listings.
+
+This project is built using a **full-stack architecture with React, Node.js, Express, and MySQL**, including authentication and protected routes for admin access.
+
+---
+
+# 🚀 Live Demo
+
+* 🌐 **Frontend Live Site:** https://job-board-gorav.netlify.app
+* 🔗 **Backend API:** https://job-board-api.onrender.com
+
+---
+
+# 🛠 Tech Stack
+
+| Layer          | Technology                |
+| -------------- | ------------------------- |
+| Frontend       | React, Context API, Axios |
+| Backend        | Node.js, Express.js       |
+| Database       | MySQL (XAMPP)             |
+| Authentication | JWT, bcrypt               |
+| Styling        | CSS                       |
+| Deployment     | Netlify + Render          |
+
+---
+
+# 📁 Folder Structure
+
+```bash
 job-board-app/
+│
 ├── backend/
 │   ├── routes/
-│   │   └── jobs.js               # CRUD routes for job posts
+│   │   └── jobs.js
+│   │
 │   ├── middleware/
-│   │   └── authMiddleware.js     # JWT token verification
-│   ├── db.js                     # MySQL DB connection
-│   ├── auth.js                   # Auth routes (login/register/logout/me)
-│   ├── index.js                  # Backend server setup
-│   ├── hashPassword.js           # Utility to hash password manually
-│   └── package.json              # Backend dependencies & scripts
-
+│   │   └── authMiddleware.js
+│   │
+│   ├── db.js
+│   ├── auth.js
+│   ├── index.js
+│   ├── hashPassword.js
+│   └── package.json
+│
 ├── frontend/
-    └── src/
-        ├── api.js                # Axios instance with credentials
-        ├── components/
-        │   ├── AdminDashboard.js
-        │   ├── AdminJobs.js
-        │   ├── JobForm.js
-        │   ├── JobList.js
-        │   ├── JobFilters.js
-        │   ├── Login.js
-        │   ├── Register.js
-        │   ├── Navbar.js
-        │   └── Spinner.js
-        ├── contexts/
-        │   └── AuthContext.js     # Auth context (login, logout, get current user)
-        ├── App.js
-        ├── index.js
-        └── styles.css
+│   └── src/
+│       ├── api.js
+│       │
+│       ├── components/
+│       │   ├── AdminDashboard.js
+│       │   ├── AdminJobs.js
+│       │   ├── JobForm.js
+│       │   ├── JobList.js
+│       │   ├── JobFilters.js
+│       │   ├── Login.js
+│       │   ├── Register.js
+│       │   ├── Navbar.js
+│       │   └── Spinner.js
+│       │
+│       ├── contexts/
+│       │   └── AuthContext.js
+│       │
+│       ├── App.js
+│       ├── index.js
+│       └── styles.css
+```
 
-⚙️ Tech Stack:
-Layer	Tech
-Frontend	React, Context API, Axios
-Backend	Node.js, Express
-Database	MySQL (XAMPP)
-Auth	JWT, bcrypt
-Styling	CSS
-Deployment	localhost (can be deployed on Vercel + Render/MySQL Remote)
+---
 
-🔐 Authentication Features:
-JWT-based login
-Admin role-based routing
-Protected routes with AuthContext
-Cookies stored via httpOnly cookies
+# 🔐 Authentication Features
 
-📦 Backend Setup:
+* JWT-based authentication
+* Admin role-based access control
+* Protected frontend routes using Context API
+* Secure cookie handling with **httpOnly cookies**
+
+---
+
+# 📦 Backend Setup
+
+```bash
 cd backend
 npm install
 npm start
+```
 
-✅ .env
+## ✅ Environment Variables (.env)
+
+```env
 PORT=4000
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=
 DB_NAME=jobboard
 JWT_SECRET=yourSecretHere
+```
 
-✅ Manual Admin Password Hashing
-To manually insert a hashed password:
+---
+
+# 🔑 Manual Admin Password Hashing
+
+To manually generate a hashed password:
+
+```bash
 node hashPassword.js yourpassword
+```
 
-Then paste the hash in your MySQL DB like:
-INSERT INTO users (username, password, isAdmin) VALUES ('admin', '<paste_hash_here>', 1);
+Then insert the generated hash into MySQL:
 
-🌐 Frontend Setup
+```sql
+INSERT INTO users (username, password, isAdmin)
+VALUES ('admin', '<paste_hash_here>', 1);
+```
+
+---
+
+# 🌐 Frontend Setup
+
+```bash
 cd frontend
 npm install
 npm start
+```
 
-🌍 Axios Configuration (api.js):
-axios.create({
+---
+
+# 🔌 Axios Configuration
+
+## frontend/src/api.js
+
+```javascript
+import axios from 'axios';
+
+const api = axios.create({
   baseURL: 'http://localhost:4000/api',
   withCredentials: true,
 });
 
-📸 Screenshots:
-🔐 Login Page	👤 Admin Dashboard
-📄 Job Listing	🎯 Filters UI
-📁 Save these images under: frontend/public/screenshots/
+export default api;
+```
 
-📚 Key Functionalities:
-✅ Admin Features:
-Login/logout
-View, Add, Edit, Delete jobs
-Token stored in httpOnly cookie
+---
 
-✅ User Features:
-View jobs
-Filter by location/title/type
-No login required
+# 📚 Core Functionalities
 
-✅ Authentication Flow:
-POST /api/auth/login: Get JWT token
-GET /api/auth/me: Validate token & return user
-POST /api/auth/logout: Logout by clearing cookie
+## ✅ Admin Features
 
-🔐 Important Files Explained :
-auth.js – Login/Register/Logout APIs
-authMiddleware.js – JWT token checker
-hashPassword.js – Utility to hash password
-AuthContext.js – Auth logic in frontend
-AdminDashboard.js – Admin-only job management
-JobForm.js – Create/Edit job form
-JobList.js – Public job listing UI
-JobFilters.js – Search & filter form
-Navbar.js – Dynamic navbar based on user
-Spinner.js – Loading indicator
+* Login / Logout
+* Add new job posts
+* Edit existing jobs
+* Delete jobs
+* Protected admin dashboard
 
-🚀 Future Improvements :
-Pagination
-Email notifications
-Admin user management
-Resume upload option
+## ✅ User Features
 
-✅ Live Demo
-🌐 Live Site: https://job-board-gorav.netlify.app
-🔗 Backend (Render): https://job-board-api.onrender.com
+* View all available jobs
+* Filter jobs by:
+
+  * Title
+  * Location
+  * Job Type
+
+## ✅ Authentication Flow
+
+* `POST /api/auth/login` → Login & get JWT token
+* `GET /api/auth/me` → Validate token & fetch current user
+* `POST /api/auth/logout` → Clear cookie & logout
+
+---
+
+# 📂 Important Files Explained
+
+## Backend
+
+* **auth.js** → Login / Register / Logout APIs
+* **authMiddleware.js** → JWT verification middleware
+* **hashPassword.js** → Password hashing utility
+* **jobs.js** → CRUD operations for jobs
+* **db.js** → MySQL connection setup
+
+## Frontend
+
+* **AuthContext.js** → Authentication state management
+* **AdminDashboard.js** → Admin job management panel
+* **JobForm.js** → Create / Edit job form
+* **JobList.js** → Public job listing page
+* **JobFilters.js** → Search and filter jobs
+* **Navbar.js** → Dynamic navbar based on auth state
+* **Spinner.js** → Loading indicator
+
+---
+
+# 📸 Screenshots
+
+Save screenshots inside:
+
+```bash
+frontend/public/screenshots/
+```
+
+Recommended screenshots:
+
+* 🔐 Login Page
+* 👤 Admin Dashboard
+* 📄 Job Listing
+* 🎯 Filters UI
+
+---
+
+# 🚀 Future Improvements
+
+* Pagination
+* Email notifications
+* Resume upload feature
+* Admin user management
+* Search optimization
+* Job application tracking
+
+---
+
+# ✅ Project Highlights
+
+* Full authentication flow implemented
+* Admin-only protected routes
+* Clean folder structure
+* Production-ready API integration
+* Scalable architecture
+
+---
+
+# 👨‍💻 Author
+
+**Gorav Gumber**
+
+---
+
+# ⭐ If you like this project
+
+Give it a **star on GitHub** and connect for more full-stack projects 🚀
